@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ໃບບິນ — RACE AUCTION</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=Noto+Sans+Lao:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+:root {
+    --bg:        #0a0a0c;
+    --bg-card:   #111116;
+    --bg-panel:  #16161d;
+    --gold:      #c9993a;
+    --gold-lt:   #e8b84b;
+    --gold-dim:  #7a5c1e;
+    --text:      #eceae3;
+    --text-muted:#7a7870;
+    --border:    #2a2a35;
+    --border-lt: #3d3d4d;
+    --ff-head: 'Bebas Neue', 'Noto Sans Lao', sans-serif;
+    --ff-body: 'Barlow Condensed', 'Noto Sans Lao', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    background: var(--bg);
+    font-family: var(--ff-body);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px;
+    -webkit-font-smoothing: antialiased;
+}
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    opacity: 0.4;
+}
+
+/* ── BILL CARD ── */
+.bill-wrap {
+    width: 100%;
+    max-width: 440px;
+    animation: slideUp 0.5s cubic-bezier(.22,1,.36,1) both;
+    position: relative;
+    z-index: 1;
+}
+@keyframes slideUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+}
+
+/* TOP STRIP */
+.bill-top {
+    background: var(--gold);
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+}
+.bill-top::before {
+    content: 'RECEIPT';
+    position: absolute;
+    right: -12px;
+    top: -20px;
+    font-family: var(--ff-head);
+    font-size: 6rem;
+    color: rgba(0,0,0,0.12);
+    letter-spacing: -0.04em;
+    pointer-events: none;
+    line-height: 1;
+}
+.bill-top .icon-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+}
+.bill-top .icon-row i {
+    font-size: 1.4rem;
+    color: var(--bg);
+    background: rgba(0,0,0,0.15);
+    width: 42px; height: 42px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%;
+}
+.bill-top h2 {
+    font-family: var(--ff-head);
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    color: var(--bg);
+    line-height: 1;
+}
+.bill-top p {
+    font-size: 0.7rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.45);
+    margin-top: 4px;
+}
+
+/* BODY */
+.bill-body {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-top: none;
+    padding: 28px 28px 24px;
+}
+
+/* INFO BOX */
+.info-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold-dim);
+    padding: 14px 16px;
+    margin-bottom: 22px;
+    border-radius: 2px;
+}
+.info-box p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 2;
+}
+.info-box p b {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-right: 8px;
+}
+.info-box p span {
+    color: var(--text);
+    font-weight: 500;
+}
+
+/* ITEMS */
+.items-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.items-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+}
+
+.item-list { margin-bottom: 0; }
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.88rem;
+    gap: 12px;
+}
+.item:last-child { border-bottom: none; }
+.item span:first-child { color: var(--text); }
+.item span:last-child {
+    font-family: var(--ff-head);
+    font-size: 1rem;
+    color: var(--gold);
+    white-space: nowrap;
+    letter-spacing: 0.04em;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 14px 16px;
+    margin: 16px 0 22px;
+    border-bottom: 2px solid var(--gold);
+}
+.total-row span:first-child {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+#display-total {
+    font-family: var(--ff-head);
+    font-size: 2rem;
+    color: var(--gold-lt);
+    letter-spacing: 0.06em;
+}
+
+.action-btns { display: flex; flex-direction: column; gap: 8px; }
+
+.btn {
+    width: 100%;
+    padding: 12px 16px;
+    border: none;
+    font-family: var(--ff-head);
+    font-size: 0.95rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    transition: opacity 0.2s, transform 0.15s;
+    border-radius: 2px;
+}
+.btn:hover { opacity: 0.85; transform: translateY(-1px); }
+.btn-print { background: var(--gold); color: var(--bg); }
+.btn-save  { background: #1a7a4a; color: white; border: 1px solid #2a9a5a; }
+.btn-back  { background: transparent; color: var(--text-muted); border: 1px solid var(--border-lt); font-family: var(--ff-body); font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; font-size: 0.8rem; }
+.btn-back:hover { color: var(--text); border-color: var(--gold-dim); }
+
+/* PRINT */
+@media print {
+    .action-btns { display: none; }
+    body { background: white; padding: 0; color: #111; }
+    .bill-wrap { max-width: 100%; }
+    .bill-top { background: #c9993a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .bill-body { background: white !important; border: 1px solid #ddd; }
+    .info-box, .item-list, .total-row { background: #f8f8f8 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+
+@media (max-width: 480px) {
+    body { padding: 24px 12px; }
+    .bill-top { padding: 22px 20px 18px; }
+    .bill-body { padding: 20px 18px 18px; }
+}
+    </style>
+</head>
+<body>
+    <div class="bill-wrap">
+        <div class="bill-top">
+            <div class="icon-row">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h2>ໃບບິນຮັບເງິນ</h2>
+            <p>Order Confirmed — Race Auction</p>
+        </div>
+        <div class="bill-body">
+            <div id="display-info" class="info-box"></div>
+            <div class="items-label"><i class="fa-solid fa-horse-head"></i> ລາຍການສິນຄ້າ</div>
+            <div id="display-items" class="item-list"></div>
+            <div class="total-row">
+                <span>ລວມທັງໝົດ</span>
+                <span id="display-total">—</span>
+            </div>
+            <div class="action-btns">
+                <button class="btn btn-print" onclick="window.print()">
+                    <i class="fa-solid fa-print"></i> ພີມໃບບິນ
+                </button>
+                <button class="btn btn-save" onclick="window.print()">
+                    <i class="fa-solid fa-file-arrow-down"></i> ບັນທຶກເປັນ PDF
+                </button>
+                <button class="btn btn-back" onclick="location.href='h15.html'">
+                    <i class="fa-solid fa-arrow-left"></i> ກັບຄືນໜ້າຫຼັກ
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const orderData = JSON.parse(localStorage.getItem('myOrder'));
+        if (orderData) {
+            document.getElementById('display-info').innerHTML = `
+                <p><b>ວັນທີ</b><span>${orderData.date}</span></p>
+                <p><b>ຊື່ລູກຄ້າ</b><span>${orderData.name}</span></p>
+                <p><b>ເບີໂທ</b><span>${orderData.tel}</span></p>
+                <p><b>ທີ່ຢູ່</b><span>${orderData.loc || '—'}</span></p>
+                ${orderData.coupon ? `<p><b>ໂຄດ</b><span style="color:#3dcf7a;">✓ ${orderData.coupon}</span></p>` : ''}
+            `;
+            let itemsHtml = orderData.items.map(item => `
+                <div class="item">
+                    <span>${item.name}</span>
+                    <span>$${item.price.toLocaleString()}</span>
+                </div>
+            `).join('');
+            if (orderData.discount) {
+                itemsHtml += `
+                <div class="item" style="opacity:0.7;">
+                    <span style="font-size:0.78rem;letter-spacing:0.05em;">ລວມກ່ອນຫຼຸດ</span>
+                    <span style="font-size:0.88rem;">${orderData.subtotal}</span>
+                </div>
+                <div class="item" style="color:#3dcf7a;">
+                    <span style="font-size:0.78rem;letter-spacing:0.05em;">ສ່ວນຫຼຸດ (LAO2024)</span>
+                    <span style="font-size:0.88rem;color:#3dcf7a;">${orderData.discount}</span>
+                </div>`;
+            }
+            document.getElementById('display-items').innerHTML = itemsHtml;
+            document.getElementById('display-total').innerText = orderData.total;
+        } else {
+            document.querySelector('.bill-wrap').innerHTML = `
+                <div style="padding:50px 30px;text-align:center;color:#7a7870;font-family:'Barlow Condensed',sans-serif;">
+                    <i class="fa-solid fa-circle-exclamation" style="font-size:2.5rem;display:block;margin-bottom:14px;color:#c9993a;"></i>
+                    <p style="font-size:1rem;letter-spacing:0.1em;">ບໍ່ພົບຂໍ້ມູນການສັ່ງຊື້</p>
+                    <button onclick="location.href='h15.html'" style="margin-top:20px;padding:10px 24px;background:transparent;border:1px solid #3d3d4d;color:#7a7870;font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;cursor:pointer;border-radius:2px;">← ກັບຄືນ</button>
+                </div>`;
+        }
+    </script>
+</body>
+</html>
