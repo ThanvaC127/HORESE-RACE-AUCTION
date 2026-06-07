@@ -1219,17 +1219,16 @@ textarea {
     .contact-inner { gap: 12px; }
     .contact-btn { font-size: 0.75rem; padding: 6px 12px; }
 }
-/* ── CUSTOM TOOLTIP POPUP ── */
+
 .card {
-    position: relative; /* ໃຫ້ແນ່ໃຈວ່າ card ເປັນ relative ຢູ່ແລ້ວ */
+    position: relative;
 }
 
-/* ສ້າງກ່ອງປ໋ອບອັບ — ໂຊ ຢູ່ໃຕ້ card ບໍ່ບັງຮູບ/ວິດີໂອ */
 .card::after {
     content: "ໂອກາດຊະນະ: " attr(data-winrate) "%\A ເພດ: " attr(data-gender-label) "\A ປະເທດ: " attr(data-origin);
     white-space: pre-wrap;
     position: absolute;
-    bottom: calc(100% + 8px); /* ລອຍຢູ່ໜ້ານຳ card ດ້ານລຸ່ມ */
+    bottom: calc(100% + 8px);
     left: 50%;
     transform: translateX(-50%) translateY(8px);
     background: rgba(10, 10, 12, 0.96);
@@ -1250,7 +1249,6 @@ textarea {
     transition: transform 0.2s var(--ease), opacity 0.2s var(--ease), visibility 0.2s var(--ease);
 }
 
-/* ເມື່ອ hover ໃຫ້ popup ໂຊຂຶ້ນ */
 .card:hover::after {
     opacity: 1;
     visibility: visible;
