@@ -233,7 +233,7 @@ header::after {
     transition: background 0.2s var(--ease);
     animation: fadeIn 0.4s var(--ease) both;
     position: relative;
-    overflow: visible; /* ອະນຸຍາດໃຫ້ popup ລອຍອອກນອກ card */
+    overflow: visible;
 }
 .promo-wrapper {
     width: 100%;
@@ -691,7 +691,6 @@ textarea {
     color: var(--bg);
 }
 
-/* ── SORT BAR ── */
 .sort-bar {
     display: flex;
     align-items: center;
@@ -1239,7 +1238,7 @@ textarea {
     font-size: 0.85rem;
     line-height: 1.6;
     border-radius: var(--r-sm);
-    z-index: 200;   /* ສູງກວ່າ card ທຸກຢ່າງ */
+    z-index: 200;
     width: 160px;
     box-shadow: 0 6px 20px rgba(0,0,0,0.6);
     backdrop-filter: blur(6px);

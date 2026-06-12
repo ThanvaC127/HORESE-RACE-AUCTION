@@ -225,8 +225,7 @@ function buildCards(data) {
         const card = document.createElement('div');
         card.className = 'card';
         card.dataset.gender = p.gender;
-        
-        // ── ເພີ່ມ 3 ແຖວນີ້ເພື່ອສົ່ງຂໍ້ມູນໄປຫາ CSS Popup ──
+
         card.setAttribute('data-winrate', p.winRate);
         card.setAttribute('data-gender-label', genderLabel[p.gender]);
         card.setAttribute('data-origin', p.origin);
